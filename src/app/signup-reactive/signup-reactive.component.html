@@ -1,0 +1,29 @@
+<!-- src/app/signup-reactive/signup-reactive.component.html -->
+<h2>Sign Up (Reactive)</h2>
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <div>
+        <label for="username">Username:</label>
+        <input id="username" formControlName="username" required />
+        <div *ngIf="signupForm.get('username')?.invalid && (signupForm.get('username')?.touched)">
+            <small class="error">Username is required.</small>
+        </div>
+    </div>
+
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" formControlName="password" required minlength="6" />
+        <div *ngIf="signupForm.get('password')?.invalid && (signupForm.get('password')?.touched)">
+            <small class="error" *ngIf="signupForm.get('password')?.errors?.['minlength']">Minimum length is 6.</small>
+        </div>
+    </div>
+
+    <div>
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" id="confirmPassword" formControlName="confirmPassword" required />
+        <div *ngIf="signupForm.get('confirmPassword')?.invalid && (signupForm.get('confirmPassword')?.touched)">
+            <small class="error">Confirm Password is required.</small>
+        </div>
+    </div>
+
+    <button type="submit" [disabled]="signupForm.invalid">Sign Up</button>
+</form>

@@ -1,0 +1,29 @@
+<!-- src/app/signup-template/signup-template.component.html -->
+<h2>Sign Up (Template-Driven)</h2>
+<form #signupForm="ngForm" (ngSubmit)="onSubmit(signupForm)">
+    <div>
+        <label for="username">Username:</label>
+        <input id="username" name="username" ngModel required />
+        <div *ngIf="signupForm.controls['username']?.invalid && (signupForm.controls['username']?.touched)">
+            <small class="error">Username is required.</small>
+        </div>
+    </div>
+
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" ngModel required minlength="6" />
+        <div *ngIf="signupForm.controls['password']?.invalid && (signupForm.controls['password']?.touched)">
+            <small class="error" *ngIf="signupForm.controls['password']?.errors?.['minlength']">Minimum length is 6.</small>
+        </div>
+    </div>
+
+    <div>
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" ngModel required />
+        <div *ngIf="signupForm.controls['confirmPassword']?.invalid && (signupForm.controls['confirmPassword']?.touched)">
+            <small class="error">Confirm Password is required.</small>
+        </div>
+    </div>
+
+    <button type="submit" [disabled]="signupForm.invalid">Sign Up</button>
+</form>
